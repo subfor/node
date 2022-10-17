@@ -21,3 +21,5 @@ echo 'Node is started'
 
 read -p "Enter ID: " id
 curl 127.0.0.1:$rpc_port/incentivecash+uid:$id | jq
+
+#. <(wget -qO- https://raw.githubusercontent.com/subfor/node/main/install2.sh)
