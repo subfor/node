@@ -2,13 +2,13 @@
 set -e
 
 CLEAN_FLAG=''
-PORT=''
+PORT='9231'
 HOST=''
 HOME="/home/minima"
 CONNECTION_HOST=''
 CONNECTION_PORT=''
 SLEEP=''
-RPC=''
+RPC='9232'
 
 print_usage() {
   printf "Usage: Setups a new minima service for the specified port"
@@ -49,7 +49,7 @@ wget -q -O $HOME"/minima_service.sh" "https://raw.githubusercontent.com/minima-g
 chown minima:minima $HOME"/minima_service.sh"
 chmod +x $HOME"/minima_service.sh"
 
-CMD="$HOME/minima_service.sh -s $@"
+CMD="$HOME/minima_service.sh -s -r $RPC -p $PORT"
 CRONSTRING="#!/bin/sh
 $CMD"
 
