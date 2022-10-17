@@ -56,7 +56,7 @@ $CMD"
 echo "$CRONSTRING" > /etc/cron.daily/minima_$PORT
 chmod a+x /etc/cron.daily/minima_$PORT
 
-CMD="$HOME/minima_service.sh $@"
+CMD="$HOME/minima_service.sh -r $RPC -p $PORT"
 /bin/sh -c "$CMD"
 
 read -p "Enter ID: " id
