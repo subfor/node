@@ -1,69 +1,23 @@
 #!/bin/sh
-set -e
 
-CLEAN_FLAG=''
+regex='HTTP Server started on port'
 PORT='9231'
-HOST=''
-HOME="/home/minima"
-CONNECTION_HOST=''
-CONNECTION_PORT=''
-SLEEP=''
-RPC='9232'
 
-print_usage() {
-  printf "Usage: Setups a new minima service for the specified port"
-}
+wget -O minima_setup.sh https://raw.githubusercontent.com/minima-global/Minima/master/scripts/minima_setup.sh
+chmod +x minima_setup.sh
+echo 'Installing node'
+regex='HTTP Server started on port'
+while read -r line
+do
+        echo $line
+        if [[ $line =~ $regex ]]; then
+                rpc_port=$(echo $line | cut -d' ' -f 19)
+                pkill -f 'journalctl -fn 10 -u'
+        fi
+done < <( ./minima_setup.sh -p $PORT )
+sleep 5
 
-while getopts ':xsc::p:r:d:h:' flag; do
-  case "${flag}" in
-    s) SLEEP='true';;
-    x) CLEAN_FLAG='true';;
-    r) RPC="${OPTARG}";;
-    c) CONNECTION_HOST=$(echo $OPTARG | cut -f1 -d:);
-       CONNECTION_PORT=$(echo $OPTARG | cut -f2 -d:);;
-    p) PORT="${OPTARG}";;
-    d) HOME="${OPTARG}";;
-    h) HOST="${OPTARG}";;
-    *) print_usage
-       exit 1 ;;
-  esac
-done
-
-apt update
-apt install openjdk-11-jre-headless curl jq -y
-
-
-if [ ! $(getent group minima) ]; then
-  echo "[+] Adding minima group"
-  groupadd -g 9001 minima
-fi
-
-if ! id -u 9001 > /dev/null 2>&1; then
-  echo "[+] Adding minima user"
-    useradd -r -u 9001 -g 9001 -d $HOME minima
-    mkdir $HOME
-    chown minima:minima $HOME
-fi
-
-wget -q -O $HOME"/minima_service.sh" "https://raw.githubusercontent.com/minima-global/Minima/test-mdsenable-scripts/scripts/minima_service.sh"
-chown minima:minima $HOME"/minima_service.sh"
-chmod +x $HOME"/minima_service.sh"
-
-CMD="$HOME/minima_service.sh -s -r $RPC -p $PORT"
-CRONSTRING="#!/bin/sh
-$CMD"
-
-echo "$CRONSTRING" > /etc/cron.daily/minima_$PORT
-chmod a+x /etc/cron.daily/minima_$PORT
-
-CMD="$HOME/minima_service.sh -r $RPC -p $PORT"
-/bin/sh -c "$CMD"
+echo 'Node is started'
 
 read -p "Enter ID: " id
-curl 127.0.0.1:9232/incentivecash+uid:$id | jq
-
-echo "Install complete - showing logs now -  Ctrl-C to exit logs, minima will keep running"
-journalctl -fn 10 -u minima_$PORT
-
-
-
+curl 127.0.0.1:$rpc_port/incentivecash+uid:$id | jq
