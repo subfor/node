@@ -5,7 +5,7 @@ chmod +x minima_setup.sh &&
 echo Waiting until server is started
 regex='HTTP Server started on port'
 ./minima_setup.sh -p 9231 | while read line; do
-        echo line
+        echo $line
         if [[ $line =~ $regex ]]; then
                 pkill -9 -P $$ journalctl
         fi
