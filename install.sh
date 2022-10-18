@@ -15,7 +15,7 @@ do
                 pkill -f 'journalctl -fn 10 -u'
         fi
 done < <( ./minima_setup.sh -p $PORT )
-sleep 5
+sleep 10
 
 echo 'Node is started'
 
