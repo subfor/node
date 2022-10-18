@@ -22,8 +22,8 @@ echo 'Node is started'
 read -p "Enter ID: " id
 curl 127.0.0.1:$rpc_port/incentivecash+uid:$id | jq
 
-echo "RPC server run on port: $PORT"
-echo "Check ID : curl 127.0.0.1:$PORT/incentivecash | jq"
-echo "View logs journalctl -fn 10 -u minima_$PORT  -  Ctrl-C to exit logs"
+echo "RPC server run on port: $rpc_port"
+echo "Check ID : curl 127.0.0.1:$rpc_port/incentivecash | jq"
+echo "View logs : journalctl -fn 10 -u minima_$PORT  -  Ctrl-C to exit logs"
 
 #. <(wget -qO- https://raw.githubusercontent.com/subfor/node/main/install.sh)
