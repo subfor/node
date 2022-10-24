@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt update && apt upgrade -y
+apt update -y
 
 echo -e "\033[0;32mWrite the name of your node: \033[0m"
 read NODENAME
