@@ -2,13 +2,16 @@
 
 apt update
 
-read -p "\033[0;32mWrite the name of your node: \033[0m" NODENAME
+echo -e "\033[0;32mWrite the name of your node: \033[0m"
+read NODENAME
 echo 'export NODENAME='$NODENAME >> $HOME/.bash_profile
 
-read -p "\033[0;32mEnter your wallet address: \033[0m" WALLETADDRESS
+echo -e "\033[0;32mEnter your wallet address: \033[0m"
+read WALLETADDRESS
 echo 'export WALLETADDRESS='$WALLETADDRESS >> $HOME/.bash_profile
 
-read -p "\033[0;32mEnter plot size for farmer(100G maximum): \033[0m" PLOTSIZE
+echo -e "\033[0;32mEnter plot size for farmer(100G maximum): \033[0m"
+read PLOTSIZE
 echo 'export PLOTSIZE='$PLOTSIZE >> $HOME/.bash_profile
 source ~/.bash_profile
 
@@ -68,6 +71,7 @@ sudo systemctl restart subspacefarm subspace
 
 wget https://raw.githubusercontent.com/subfor/node/main/subspace_control.sh  -O subspace_control.sh
 chmod +x $HOME/subspace_control.sh
+
 
 if [[ `service subspace status | grep active` =~ "running" ] && [ `service subspacefarm status | grep active` =~ "running" ]]; then
   echo -e "\033[0;32mYour Node and Farmer installed and works!\033[0m"
