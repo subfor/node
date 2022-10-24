@@ -71,6 +71,7 @@ rm -r /usr/local/bin/subspace
 rm -r /usr/local/bin/farmer
 rm -r /root/.local/share/subspace-farmer
 rm -r /root/.local/share/subspace-node
+rm /root/subspace_control.sh
 break
 ;;
 
