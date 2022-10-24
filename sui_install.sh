@@ -30,7 +30,7 @@ else
     echo -e '\033[0;32mDone'
 fi
 
-echo -e '\033[0;32mInstalling software' && sleep 1
+echo -e '\033[0;32mInstalling software \033[0m' && sleep 1
 apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends tzdata git ca-certificates curl build-essential libssl-dev pkg-config libclang-dev cmake jq
 echo -e '\033[0;32mInstalling Rust \033[0m' && sleep 1
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
