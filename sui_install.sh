@@ -13,11 +13,11 @@ bash_profile=$HOME/.bash_profile
 if [ -f "$bash_profile" ]; then
     . $HOME/.bash_profile
 fi
-echo -e '\033[0;32mSetting up swapfile...\n'
+echo -e '\033[0;32mSetting up swapfile...\033[0m'
 
 grep -q "swapfile" /etc/fstab
 if [[ ! $? -ne 0 ]]; then
-    echo -e '\033[0;32mSwap file exist, skip.'
+    echo -e '\033[0;32mSwap file exist, skip.\033[0m'
 else
     cd $HOME
     sudo fallocate -l 8G $HOME/swapfile
@@ -32,7 +32,7 @@ fi
 
 echo -e '\033[0;32mInstalling software' && sleep 1
 apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y --no-install-recommends tzdata git ca-certificates curl build-essential libssl-dev pkg-config libclang-dev cmake jq
-echo -e '\033[0;32mInstalling Rust' && sleep 1
+echo -e '\033[0;32mInstalling Rust \033[0m' && sleep 1
 sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
 source $HOME/.cargo/env
 
@@ -78,11 +78,13 @@ sudo systemctl restart suid
 
 
 echo "==================================================="
-echo -e '\033[0;32mCheck Sui status : ' && sleep 1
+echo -e '\033[0;32mCheck Sui status : \033[0m' && sleep 1
 if [[ `service suid status | grep active` =~ "running" ]]; then
-  echo -e "\033[0;32mYour Sui Node installed and works!"
-  echo -e "You can check node status by the command: \033[0;32mservice suid status"
+  echo -e "\033[0;32mYour Sui Node installed and works!\033[0m"
+  echo -e "You can check node status by the command: \033[0;32mservice suid status\033[0m"
   echo -e "Press Q for exit from status menu"
+  echo -e "Paste this line in Discord: \n"
+  echo -e "\033[0;32mhttp://`wget -qO- eth0.me`:9000/\033[0m"
 else
-  echo -e "\033[0;31mYour Sui Node was not installed correctly, please reinstall."
+  echo -e "\033[0;31mYour Sui Node was not installed correctly, please reinstall.\033[0m"
 fi
