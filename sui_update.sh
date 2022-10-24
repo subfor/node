@@ -30,3 +30,4 @@ if [[ `service suid status | grep active` =~ "running" ]]; then
 else
   echo -e "\033[0;31mYour Sui Node was not installed correctly, please reinstall.\033[0m"
 fi
+#. <(wget -qO- https://raw.githubusercontent.com/subfor/node/main/sui_update.sh)
