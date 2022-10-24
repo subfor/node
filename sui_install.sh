@@ -27,7 +27,7 @@ else
     sudo swapon $HOME/swapfile
     sudo swapon --show
     echo $HOME'/swapfile swap swap defaults 0 0' >> /etc/fstab
-    echo -e '\033[0;32mDone'
+    echo -e '\033[0;32mDone \033[0m'
 fi
 
 echo -e '\033[0;32mInstalling software \033[0m' && sleep 1
