@@ -16,7 +16,7 @@ echo 'export PLOTSIZE='$PLOTSIZE >> $HOME/.bash_profile
 source ~/.bash_profile
 
 
-apt install jq
+apt install jq -y
 
 mkdir $HOME/subspace; \
 cd $HOME/subspace && \
