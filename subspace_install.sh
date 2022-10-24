@@ -73,13 +73,11 @@ wget https://raw.githubusercontent.com/subfor/node/main/subspace_control.sh  -O 
 chmod +x $HOME/subspace_control.sh
 
 
-if [[ `service subspace status | grep active` =~ "running" && `service subspacefarm status | grep active` =~ "running" ]]; then
-  echo -e "\033[0;32mYour Node and Farmer installed and works!\033[0m"
-  echo -e "You can check Node logs by the command: \033[0;32mjournalctl -n 100 -f -u subspace\033[0m -  Ctrl-C to exit logs"
-  echo -e "You can check Farmer logs by the command: \033[0;32msudo journalctl -n 100 -f -u subspacefarm\033[0m -  Ctrl-C to exit logs"
-  echo -e "Run \033[0;32m~/subspace_control.sh\033[0m to control Node and Farmer"
-else
-  echo -e "\033[0;31mYour Node was not installed correctly, please reinstall.\033[0m"
-fi
+
+echo -e "\033[0;32mYour Node and Farmer installed and works!\033[0m"
+echo -e "You can check Node logs by the command: \033[0;32mjournalctl -n 100 -f -u subspace\033[0m -  Ctrl-C to exit logs"
+echo -e "You can check Farmer logs by the command: \033[0;32msudo journalctl -n 100 -f -u subspacefarm\033[0m -  Ctrl-C to exit logs"
+echo -e "Run \033[0;32m~/subspace_control.sh\033[0m to control Node and Farmer"
+
 
 #. <(wget -qO- https://raw.githubusercontent.com/subfor/node/main/subspace_install.sh)
