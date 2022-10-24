@@ -2,13 +2,13 @@
 
 apt update
 
-read -p "Write the name of your node: " NODENAME
+read -p "\033[0;32mWrite the name of your node: \033[0m" NODENAME
 echo 'export NODENAME='$NODENAME >> $HOME/.bash_profile
 
-read -p "Enter your wallet address: " WALLETADDRESS
+read -p "\033[0;32mEnter your wallet address: \033[0m" WALLETADDRESS
 echo 'export WALLETADDRESS='$WALLETADDRESS >> $HOME/.bash_profile
 
-read -p "Enter plot size for farmer(100G maximum): " PLOTSIZE
+read -p "\033[0;32mEnter plot size for farmer(100G maximum): \033[0m" PLOTSIZE
 echo 'export PLOTSIZE='$PLOTSIZE >> $HOME/.bash_profile
 source ~/.bash_profile
 
@@ -77,3 +77,5 @@ if [[ `service subspace status | grep active` =~ "running" ] && [ `service subsp
 else
   echo -e "\033[0;31mYour Node was not installed correctly, please reinstall.\033[0m"
 fi
+
+#. <(wget -qO- https://raw.githubusercontent.com/subfor/node/main/subspace_install.sh)
